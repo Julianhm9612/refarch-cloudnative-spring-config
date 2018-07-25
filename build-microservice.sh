@@ -2,7 +2,7 @@
 
 IMAGE_NAME=spring-config
 MAVEN_BUILD_TARGET=target/config-server-0.0.1-SNAPSHOT.jar
-GRADLE_BUILD_TARGET=build/libs/config-server-0.0.1-SNAPSHOT.jar
+GRADLE_BUILD_TARGET=build/libs/spring-config-server-0.0.1-SNAPSHOT.jar
 
 while getopts "md" ARG; do
   case ${ARG} in
@@ -23,11 +23,11 @@ if [[ ${USE_MAVEN} == 'yes' ]]; then
 else
   ./gradlew clean build
   if [[ ${DO_DOCKER} == 'yes' ]]; then
-	cp ${GRADLE_BUILD_TARGET} docker/app.jar
+	cp ${GRADLE_BUILD_TARGET} src/main/docker/app.jar
   fi
 fi
 
 if [[ ${DO_DOCKER} == 'yes' ]]; then
-  cd docker/
+  cd src/main/docker/
   docker build -t ${IMAGE_NAME} .
 fi
